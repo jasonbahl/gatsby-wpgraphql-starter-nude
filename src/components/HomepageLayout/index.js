@@ -7,7 +7,7 @@ import gatsbyLogo from "../../images/gatsby-logo.png"
 const { Content } = Layout
 
 const HomepageLayout = ({ pageNumber, location, children }) => (
-  <Layout>
+  <>
     <SiteHeader location={location} />
     {!pageNumber ? (
       <Row
@@ -118,7 +118,7 @@ const HomepageLayout = ({ pageNumber, location, children }) => (
         </Content>
       </Col>
     </Row>
-  </Layout>
+  </>
 )
 
 export default HomepageLayout

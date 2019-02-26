@@ -4,7 +4,7 @@ module.exports = async ({ actions, graphql }) => {
   query GET_POSTS($first:Int $after:String){
     wpgraphql {
       posts(
-        first: $first 
+        first: $first
         after:$after
       ) {
         pageInfo {
@@ -47,6 +47,8 @@ module.exports = async ({ actions, graphql }) => {
           ids: nodeIds,
           pageNumber: pageNumber,
           hasNextPage: hasNextPage,
+          allPosts: allPosts,
+          itemsPerPage: 12,
         },
         ids: nodeIds,
       }

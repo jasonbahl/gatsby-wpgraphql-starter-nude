@@ -7,54 +7,14 @@ import RecentPostsWidget from "../components/RecentPostsWidget"
 import PostEntry from "../components/PostEntry"
 import HomepageLayout from "../components/HomepageLayout"
 import Seo from "../components/Seo"
+import Pagination from "../components/Pagination"
 
 class IndexPage extends Component {
-  renderPreviousLink = () => {
-    const {
-      pageContext: { pageNumber },
-    } = this.props
-
-    let previousLink = null
-
-    if (!pageNumber) {
-      return null
-    } else if (1 === pageNumber) {
-      previousLink = `/`
-    } else if (1 < pageNumber) {
-      previousLink = `/page/${pageNumber - 1}`
-    }
-
-    return (
-      <Button type="primary" onClick={() => navigate(previousLink)}>
-        Previous Posts
-      </Button>
-    )
-  }
-
-  renderNextLink = () => {
-    const {
-      pageContext: { hasNextPage, pageNumber },
-    } = this.props
-
-    if (hasNextPage) {
-      return (
-        <Button
-          type="primary"
-          onClick={() => navigate(`/page/${pageNumber + 1}`)}
-        >
-          Next Posts
-        </Button>
-      )
-    } else {
-      return null
-    }
-  }
-
   render() {
     const {
       data,
       location,
-      pageContext: { pageNumber },
+      pageContext: { pageNumber, hasNextPage, allPosts, itemsPerPage },
     } = this.props
     const blogPageNumber = pageNumber ? ` Page ${pageNumber}` : ``
     return (
@@ -76,26 +36,12 @@ class IndexPage extends Component {
             <RecentCommentsWidget />
           </Col>
         </Row>
-        <Row
-          type="flex"
-          justify="space-between"
-          style={{
-            background: `#001529`,
-            margin: `50px -50px -50px -50px`,
-            padding: `25px`,
-          }}
-        >
-          <Col xs={12}>
-            <Row type="flex" justify="start">
-              {this.renderPreviousLink()}
-            </Row>
-          </Col>
-          <Col xs={12}>
-            <Row type="flex" justify="end">
-              {this.renderNextLink()}
-            </Row>
-          </Col>
-        </Row>
+        <Pagination
+          pageNumber={pageNumber}
+          hasNextPage={hasNextPage}
+          allPosts={allPosts}
+          itemsPerPage={itemsPerPage}
+        />
       </HomepageLayout>
     )
   }

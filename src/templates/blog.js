@@ -52,7 +52,7 @@ export default IndexPage
 export const query = graphql`
   query GET_POSTS($ids: [ID]) {
     wpgraphql {
-      posts(where: { in: $ids }) {
+      posts(first: 12, where: { in: $ids }) {
         nodes {
           ...PostEntryFragment
         }

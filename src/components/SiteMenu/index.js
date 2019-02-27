@@ -1,10 +1,6 @@
 import React from "react"
-import { Menu } from "antd"
 import { Link, StaticQuery, graphql } from "gatsby"
 import { createLocalLink } from "../../utils"
-
-const SubMenu = Menu.SubMenu
-const MenuItemGroup = Menu.ItemGroup
 
 const MENU_QUERY = graphql`
   fragment MenuFields on WPGraphQL_MenuItem {
@@ -78,23 +74,28 @@ const renderMenuItem = menuItem => {
     return renderSubMenu(menuItem)
   } else {
     return (
-      <Menu.Item key={menuItem.id}>
+      <li className="menu-item" key={menuItem.id}>
         {link ? (
           <Link to={createLocalLink(menuItem.url)}>{menuItem.label}</Link>
         ) : (
           menuItem.label
         )}
-      </Menu.Item>
+      </li>
     )
   }
 }
 
 const renderSubMenu = menuItem => (
-  <SubMenu title={menuItem.label}>
-    <MenuItemGroup title={menuItem.label}>
+  <li className="has-subMenu menu-item" key={menuItem.id}>
+    {createLocalLink(menuItem.url) ? (
+      <Link to={createLocalLink(menuItem.url)}>{menuItem.label}</Link>
+    ) : (
+      menuItem.label
+    )}
+    <ul className="menuItemGroup">
       {menuItem.childItems.nodes.map(item => renderMenuItem(item))}
-    </MenuItemGroup>
-  </SubMenu>
+    </ul>
+  </li>
 )
 
 const SiteMenu = ({ location }) => (
@@ -103,15 +104,7 @@ const SiteMenu = ({ location }) => (
     render={data => {
       if (data.wpgraphql.menuItems) {
         return (
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={[location.pathname ? location.pathname : `1`]}
-            style={{
-              float: `right`,
-              lineHeight: `64px`,
-            }}
-          >
+          <ul role="menu">
             {data.wpgraphql.menuItems.nodes.map(menuItem => {
               if (menuItem.childItems.nodes.length) {
                 return renderSubMenu(menuItem)
@@ -119,7 +112,7 @@ const SiteMenu = ({ location }) => (
                 return renderMenuItem(menuItem)
               }
             })}
-          </Menu>
+          </ul>
         )
       } else {
         return null

@@ -1,3 +1,8 @@
+# wpgraphql starter "nude"
+
+fork from https://github.com/wp-graphql/gatsby-wpgraphql-blog-example
+With all styles from antd removed
+
 <p align="center">
   <a href="https://www.gatsbyjs.org">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
@@ -10,14 +15,13 @@
   Gatsby + WPGraphQL Blog Example
 </h1>
 
-This is an example Gatsby site using WPGraphQL as the source. 
+This is an example Gatsby site using WPGraphQL as the source.
 
 ## WordPress Source
 
 The WordPress where the content is managed lives here: [https://demo.wpgraphql.com](https://demo.wpgraphql.com)
 
 ![Screenshot of the WordPress source site](./img/screenshot-demo.wpgraphql.com.png)
-
 
 ## Gatsby Site
 
@@ -27,7 +31,7 @@ The Live Gatsby site is at: [https://gatsby-wpgraphql-blog-example.netlify.com/]
 
 ### Features
 
-Below are features of the Gatsby site that are all sourced via WPGraphQL Queries, so the data is 
+Below are features of the Gatsby site that are all sourced via WPGraphQL Queries, so the data is
 managed in WordPress, but is pulled into the Gatsby site and rendered there:
 
 - :white_check_mark: Menus

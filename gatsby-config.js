@@ -1,3 +1,6 @@
+// Plugins
+const autoprefixer = require("autoprefixer")
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby WPGraphQL Source Demo`,
@@ -20,6 +23,16 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
+    {
+      resolve: "gatsby-plugin-postcss",
+      options: {
+        postCssPlugins: [
+          autoprefixer({
+            browsers: ["last 2 versions"],
+          }),
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {

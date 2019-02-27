@@ -1,7 +1,6 @@
 import React from "react"
 import SiteLayout from "../components/SiteLayout"
 import { graphql } from "gatsby"
-import { Row, Col } from "antd"
 import CategoriesWidget from "../components/CategoriesWidget"
 import RecentCommentsWidget from "../components/RecentCommentsWidget"
 import RecentPostsWidget from "../components/RecentPostsWidget"

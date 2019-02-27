@@ -1,6 +1,5 @@
 import React, { Fragment } from "react"
 import { graphql } from "gatsby"
-import { Row, Col, Divider, Tag } from "antd"
 import SiteLayout from "../components/SiteLayout"
 import CategoriesWidget from "../components/CategoriesWidget"
 import RecentCommentsWidget from "../components/RecentCommentsWidget"
@@ -13,17 +12,16 @@ const renderTermNodes = (nodes, title) => (
     {title}
     {` `}
     {nodes.map(term => (
-      <Tag>{term.name}</Tag>
+      <div className="tag">{term.name}</div>
     ))}
   </div>
 )
 
 const renderTerms = (categoryNodes = [], tagNodes = []) => (
-  <Fragment>
-    <Divider />
+  <>
     {categoryNodes ? renderTermNodes(categoryNodes, `Categories: `) : null}
-    {tagNodes && tagNodes.length ? renderTermNodes(tagNodes, `Tags: `) : null }
-  </Fragment>
+    {tagNodes && tagNodes.length ? renderTermNodes(tagNodes, `Tags: `) : null}
+  </>
 )
 
 const Post = props => {
@@ -37,31 +35,24 @@ const Post = props => {
   return (
     <SiteLayout location={location}>
       <Seo title={`${post.title}`} />
-      <Row type="flex" gutter={24}>
-        <Col xs={24} md={16}>
-          <h1 style={{ wordBreak: `break-all` }}>{title}</h1>
-          <Divider />
-          <Row type="flex" justify="space-around" gutter={24}>
-            <Col xs={24} md={6}>
-              <PostEntryMeta post={post} />
-            </Col>
-            <Col xs={24} md={18}>
-              <div
-                style={{ wordBreak: `break-all` }}
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-              {post.categories.nodes.length || post.tags.nodes.length
-                ? renderTerms(post.categories.nodes, post.tags.nodes)
-                : null}
-            </Col>
-          </Row>
-        </Col>
-        <Col xs={24} md={8}>
-          <RecentPostsWidget />
-          <CategoriesWidget />
-          <RecentCommentsWidget />
-        </Col>
-      </Row>
+      <div className="content">
+        <h1 style={{ wordBreak: `break-all` }}>{title}</h1>
+
+        <PostEntryMeta post={post} />
+
+        <div
+          style={{ wordBreak: `break-all` }}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+        {post.categories.nodes.length || post.tags.nodes.length
+          ? renderTerms(post.categories.nodes, post.tags.nodes)
+          : null}
+      </div>
+      <div className="sidebar">
+        <RecentPostsWidget />
+        <CategoriesWidget />
+        <RecentCommentsWidget />
+      </div>
     </SiteLayout>
   )
 }

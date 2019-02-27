@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import { graphql, navigate } from "gatsby"
-import { Button, Col, Row } from "antd"
+import { graphql } from "gatsby"
 import CategoriesWidget from "../components/CategoriesWidget"
 import RecentCommentsWidget from "../components/RecentCommentsWidget"
 import RecentPostsWidget from "../components/RecentPostsWidget"
@@ -20,28 +19,26 @@ class IndexPage extends Component {
     return (
       <HomepageLayout pageNumber={pageNumber} location={{ location }}>
         <Seo title={`Blog${blogPageNumber}`} />
-        <Row type="flex" gutter={24}>
-          <Col xs={24} md={16}>
-            {data &&
-              data.wpgraphql &&
-              data.wpgraphql.posts.nodes.map(post => (
-                <div key={post.id}>
-                  <PostEntry post={post} />
-                </div>
-              ))}
-          </Col>
-          <Col xs={24} md={8}>
-            <RecentPostsWidget />
-            <CategoriesWidget />
-            <RecentCommentsWidget />
-          </Col>
-        </Row>
-        <Pagination
-          pageNumber={pageNumber}
-          hasNextPage={hasNextPage}
-          allPosts={allPosts}
-          itemsPerPage={itemsPerPage}
-        />
+        <div className="content">
+          {data &&
+            data.wpgraphql &&
+            data.wpgraphql.posts.nodes.map(post => (
+              <div key={post.id}>
+                <PostEntry post={post} />
+              </div>
+            ))}
+          <Pagination
+            pageNumber={pageNumber}
+            hasNextPage={hasNextPage}
+            allPosts={allPosts}
+            itemsPerPage={itemsPerPage}
+          />
+        </div>
+        <div className="sidebar">
+          <RecentPostsWidget />
+          <CategoriesWidget />
+          <RecentCommentsWidget />
+        </div>
       </HomepageLayout>
     )
   }

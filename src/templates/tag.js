@@ -18,18 +18,17 @@ const TagTemplate = props => {
   return (
     <SiteLayout location={location}>
       <Seo title={`${tag.title}`} />
+
       <h2>{tag.name}</h2>
-      <Row type="flex" gutter={24}>
-        <Col xs={24} md={16}>
-          {tag.posts.nodes &&
-            tag.posts.nodes.map(post => <PostEntry post={post} />)}
-        </Col>
-        <Col xs={24} md={8}>
-          <RecentPostsWidget />
-          <CategoriesWidget />
-          <RecentCommentsWidget />
-        </Col>
-      </Row>
+      <div className="content">
+        {tag.posts.nodes &&
+          tag.posts.nodes.map(post => <PostEntry post={post} />)}
+      </div>
+      <div className="sidebar">
+        <RecentPostsWidget />
+        <CategoriesWidget />
+        <RecentCommentsWidget />
+      </div>
     </SiteLayout>
   )
 }

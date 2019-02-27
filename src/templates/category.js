@@ -1,7 +1,6 @@
 import React from "react"
 import SiteLayout from "../components/SiteLayout"
 import { graphql } from "gatsby"
-import { Row, Col, Divider } from "antd"
 import CategoriesWidget from "../components/CategoriesWidget"
 import RecentCommentsWidget from "../components/RecentCommentsWidget"
 import RecentPostsWidget from "../components/RecentPostsWidget"
@@ -18,19 +17,18 @@ const CategoryTemplate = props => {
   return (
     <SiteLayout location={location}>
       <Seo title={`${category.name}`} />
-      <Row type="flex" gutter={24}>
-        <Col xs={24} md={16}>
-          <h1>Category: {category.name}</h1>
-          <Divider />
-          {category.posts.nodes &&
-            category.posts.nodes.map(post => <PostEntry post={post} />)}
-        </Col>
-        <Col xs={24} md={8}>
-          <RecentPostsWidget />
-          <CategoriesWidget />
-          <RecentCommentsWidget />
-        </Col>
-      </Row>
+      <div className="content">
+        <h1>Category: {category.name}</h1>
+
+        {category.posts.nodes &&
+          category.posts.nodes.map(post => <PostEntry post={post} />)}
+      </div>
+
+      <div className="sidebar">
+        <RecentPostsWidget />
+        <CategoriesWidget />
+        <RecentCommentsWidget />
+      </div>
     </SiteLayout>
   )
 }
